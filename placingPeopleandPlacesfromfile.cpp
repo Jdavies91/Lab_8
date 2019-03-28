@@ -4,15 +4,18 @@
 
 #include <sstream>
 #include <fstream>
+#include <functional>
+#include <set>
 #include "placingPeopleandPlacesfromfile.hpp"
-
+#include <iostream>
+using namespace std;
 
 void placingPeopleandPlacesfromfile::readfromfile(string filename) {
     string name;
     string line="";
     string word;
-    string person;
-    int count = 0;
+
+    int count = -1;
     int indexforplaces = 0, indexforperson =0;
     Person *p;
     ifstream fin;
@@ -22,24 +25,53 @@ void placingPeopleandPlacesfromfile::readfromfile(string filename) {
 
         p= new Person();
         while(iss>>word) {
-            if(count==0){
+            if(count<0){
+                name = word;
                 // cout<< word;
-                p->setPerson(word);
+                p->setPerson(name);
             }else {
                 //   cout<< word;
-                p->setvistedplace(word,indexforplaces);
+                p->setvistedplace(name,word);
             }
             count++;
 
         }
 
-        count = 0;
-        peoplewhovisted.insert(pair<int,Person*>(indexforperson,p));
+        count = -1;
+        peoplewhovisted.insert(pair<Person*,int>(p,indexforperson));
         indexforperson++;
     }
 
 }
 
-const map<int, Person *> &placingPeopleandPlacesfromfile::people() const {
+const multimap<Person*, int> &placingPeopleandPlacesfromfile::personname() const {
     return peoplewhovisted;
+}
+
+int placingPeopleandPlacesfromfile::peoplesizemap() {
+    return peoplewhovisted.size();
+}
+void placingPeopleandPlacesfromfile::sort(placingPeopleandPlacesfromfile p) {
+
+    typedef std::function<bool(std::pair<Person*, int>, std::pair<Person*, int>)> Comparator;
+
+    Comparator compFunctor =
+            [](std::pair<Person*, int> elem1 ,std::pair<Person*, int> elem2)
+            {
+                return elem1.first->getPerson() < elem2.first->getPerson();
+            };
+    std::set<std::pair<Person*, int>, Comparator> setOfpeopple(
+            p.personname().begin(), p.personname().end(), compFunctor);
+
+    for (std::pair<Person*, int> element : setOfpeopple)
+        cout << element.first->getPerson()<<endl;
+
+}
+void placingPeopleandPlacesfromfile::vistedTavernKrusty(){
+    for(map<Person*, String>::const_iterator it = peoplewhovisted.begin();
+        it != peoplewhovisted.end(); ++it)
+    {
+        std::cout << it->first->getPerson();
+        std::cout << it->;
+    }
 }

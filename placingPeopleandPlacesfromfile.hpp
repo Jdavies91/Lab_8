@@ -13,11 +13,12 @@ using namespace std;
 class placingPeopleandPlacesfromfile {
 public:
     void readfromfile(string filename);
-
-    const map<int, Person *> &people() const;
-
+    int peoplesizemap();
+    const multimap<Person*, int> &personname() const;
+    void sort(placingPeopleandPlacesfromfile p);
+    void vistedTavernKrusty();
 private:
-    map<int,Person*> peoplewhovisted;
+    multimap<Person*,int> peoplewhovisted;
 
 };
 

@@ -3,6 +3,8 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <functional>
+#include <set>
 #include "placingPeopleandPlacesfromfile.hpp"
 #include "Person.hpp"
 using namespace std;
@@ -11,10 +13,6 @@ int main() {
     placingPeopleandPlacesfromfile p;
     string filename ="peoplePlaces.txt";
     p.readfromfile(filename);
-    cout<<p.people().at(5)->getPerson();
-
-
-
-
-    return 0;
+    p.sort(p);
+    p.vistedTavernKrusty();
 }

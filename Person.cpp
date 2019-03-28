@@ -8,14 +8,20 @@ void Person::setPerson(string p) {
     person=p;
 
 }
-void Person::setvistedplace(string place,int count) {
-    placevisted.insert(pair<int,string>(count, place));
+void Person::setvistedplace(string person,string place) {
+    placevisted.insert(pair<string,string>(place,person));
 }
-
+int Person::sizevistedplace() {
+    return placevisted.size();
+}
 const string &Person::getPerson() const {
     return person;
 }
 
-const map<int, string> &Person::getPlacevisted() const {
+map<string, string> Person::getPlacevisted(){
+
     return placevisted;
+
 }
+
+

@@ -14,16 +14,18 @@ public:
 Person()= default;
 
 void  setPerson(string p);
-void  setvistedplace(string place,int count);
+void  setvistedplace(string person,string place);
 
     const string &getPerson() const;
+    int sizevistedplace();
+    map<string, string> getPlacevisted();
+    void vistedTavernKrusty();
 
-    const map<int, string> &getPlacevisted() const;
 
 private:
     string person;
-    map<int, string> placevisted;
-    int count;
+    map<string, string> placevisted;
+
 
 };
 
