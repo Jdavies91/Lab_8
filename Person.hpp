@@ -7,24 +7,26 @@
 
 #include <map>
 #include <string>
+#include <algorithm>
+#include <iostream>
 using namespace std;
 
 class Person {
+    // all my public header functions and member for person
 public:
 Person()= default;
-
 void  setPerson(string p);
-void  setvistedplace(string person,string place);
+void  setvistedplace(int index,string place);
+const string &getPerson() const;
+int sizevistedplace();
+bool getDidntVisted(pair<Person*, int> s,string place1, string place2);
+bool getVisted(pair<Person*, int> s,string place1, string place2,bool all);
+const map<int, string> &getPlacevisted() const;
 
-    const string &getPerson() const;
-    int sizevistedplace();
-    map<string, string> getPlacevisted();
-    void vistedTavernKrusty();
-
-
+    // all my private header functions and member for the person
 private:
     string person;
-    map<string, string> placevisted;
+    map<int, string> placevisted;
 
 
 };

@@ -11,12 +11,17 @@
 using namespace std;
 
 class placingPeopleandPlacesfromfile {
+    // all my public header functions and member
 public:
     void readfromfile(string filename);
-    int peoplesizemap();
     const multimap<Person*, int> &personname() const;
     void sort(placingPeopleandPlacesfromfile p);
     void vistedTavernKrusty();
+    void didntvistHomeKrusty();
+    void didntvistTHandVistKBS();
+    void didntvistedAllLocation();
+    char abervation(string word);
+    // all my private header functions and member
 private:
     multimap<Person*,int> peoplewhovisted;
 

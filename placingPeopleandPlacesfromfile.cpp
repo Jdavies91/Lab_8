@@ -1,5 +1,5 @@
-//
-// Created by Owner on 2019-03-26.
+//This Class puts all the people in the text file and puts them in a person object.
+// Created by Jonathan Davies on 2019-03-26.
 //
 
 #include <sstream>
@@ -10,6 +10,9 @@
 #include <iostream>
 using namespace std;
 
+//Pre Brings in the file name in a string
+//post puts information in a object with name and places
+//Return Void
 void placingPeopleandPlacesfromfile::readfromfile(string filename) {
     string name;
     string line="";
@@ -31,7 +34,7 @@ void placingPeopleandPlacesfromfile::readfromfile(string filename) {
                 p->setPerson(name);
             }else {
                 //   cout<< word;
-                p->setvistedplace(name,word);
+                p->setvistedplace(count,word);
             }
             count++;
 
@@ -43,16 +46,83 @@ void placingPeopleandPlacesfromfile::readfromfile(string filename) {
     }
 
 }
-
+//Pre n/a
+//post returns the people in a map
+//Return Map
 const multimap<Person*, int> &placingPeopleandPlacesfromfile::personname() const {
     return peoplewhovisted;
 }
 
-int placingPeopleandPlacesfromfile::peoplesizemap() {
-    return peoplewhovisted.size();
-}
-void placingPeopleandPlacesfromfile::sort(placingPeopleandPlacesfromfile p) {
+//Pre n/a
+//post Post who all went to krusty burger and tavern
+//Return Void
+void placingPeopleandPlacesfromfile::vistedTavernKrusty(){
+    Person p;
+    cout<<"\nVisted both Krusty-Burger and Tavern\n";
+    for (std::pair<Person*, int> element :peoplewhovisted) {
 
+        //cout<<element.first->getPerson()<<endl;
+        if(p.getVisted(element,"Krusty-Burger","Tavern",false)){
+
+            cout<<element.first->getPerson()<<endl;
+        }
+    }
+
+}
+//Pre n/a
+//post Post who all went to krusty burger and Home
+//Return Void
+void placingPeopleandPlacesfromfile::didntvistHomeKrusty(){
+    Person p;
+    cout<<"\nDidn't  go Krusty-Burger and Home";
+    for (std::pair<Person*, int> element :peoplewhovisted) {
+
+        //cout<<element.first->getPerson()<<endl;
+        if(p.getDidntVisted(element,"Krusty-Burger","Home")){
+
+            cout<<element.first->getPerson()<<endl;
+        }
+    }
+
+}
+//Pre n/a
+//post Ouput the people who didn't vist the tavern and home but visted krustby burgery and school
+//Return Void
+
+void placingPeopleandPlacesfromfile::didntvistTHandVistKBS(){
+    Person p;
+    cout<<"\nDidn't go to the Tavern and Home but visted Krusty-burger and school\n";
+    for (std::pair<Person*, int> element :peoplewhovisted) {
+
+        //cout<<element.first->getPerson()<<endl;
+        if(p.getDidntVisted(element,"Tavern","Home")&&p.getVisted(element,"Krusty-Burger","School",false)){
+
+            cout<<element.first->getPerson()<<endl;
+        }
+    }
+
+}
+//Pre n/a
+//post all the people who didn't vist all location
+//Return Void
+void placingPeopleandPlacesfromfile::didntvistedAllLocation(){
+    Person p;
+    cout<<"\nRemoved everyone who went to every location\n";
+    for (std::pair<Person*, int> element :peoplewhovisted) {
+
+        //cout<<element.first->getPerson()<<endl;
+        if(p.getVisted(element,"Krusty-Burger","School",true)){
+
+            cout<<element.first->getPerson()<<endl;
+        }
+    }
+
+}
+//Pre n/a
+//post Sorts all the People in the text people and out puts them
+//Return Void
+void placingPeopleandPlacesfromfile::sort(placingPeopleandPlacesfromfile p) {
+    cout<<"Full sorted list";
     typedef std::function<bool(std::pair<Person*, int>, std::pair<Person*, int>)> Comparator;
 
     Comparator compFunctor =
@@ -66,12 +136,4 @@ void placingPeopleandPlacesfromfile::sort(placingPeopleandPlacesfromfile p) {
     for (std::pair<Person*, int> element : setOfpeopple)
         cout << element.first->getPerson()<<endl;
 
-}
-void placingPeopleandPlacesfromfile::vistedTavernKrusty(){
-    for(map<Person*, String>::const_iterator it = peoplewhovisted.begin();
-        it != peoplewhovisted.end(); ++it)
-    {
-        std::cout << it->first->getPerson();
-        std::cout << it->;
-    }
 }
